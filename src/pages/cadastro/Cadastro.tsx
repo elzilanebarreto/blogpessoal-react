@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Cadastro() {
   return (
     <>
@@ -23,7 +21,7 @@ function Cadastro() {
           </div>
           
           <div className='flex flex-col w-full'>
-            <label htmlFor="usuario">Usuario</label>
+            <label htmlFor="usuario">Usuário</label>
             <input 
               type="text"
               id='usuario'
