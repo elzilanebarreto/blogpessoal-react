@@ -1,11 +1,14 @@
 function FormPostagem() {
+
+  
+
   return (
     <div className="container flex flex-col mx-auto items-center">
       <h1 className="text-4xl text-center my-8">Cadastrar Postagem</h1>
 
-      <form className="w-1/2 flex flex-col gap-4">
+      <form className="flex flex-col w-1/2 gap-4">
       
-        <div className="flex flex-col w-1/2 gap-2">
+        <div className="flex flex-col gap-2">
           <label htmlFor="titulo">Título da Postagem</label>
           <input 
             type="text"

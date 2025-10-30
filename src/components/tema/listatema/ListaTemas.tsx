@@ -41,7 +41,6 @@ function ListaTemas() {
 
     } catch (error: any) {
       if(error.toString().includes('401')) {
-        alert('Sessão expirada!')
         handleLogout()
       }
     } finally {
