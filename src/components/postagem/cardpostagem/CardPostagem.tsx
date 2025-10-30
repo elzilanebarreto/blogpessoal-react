@@ -12,7 +12,7 @@ function CardPostagem({ postagem }: CardPostagemProps) {
           <img
             src={postagem.usuario?.foto || "https://i.imgur.com/pK6vSCy.png"}
             className="h-12 rounded-full"
-            alt=""
+            alt={postagem.usuario?.nome}
           />
 
           <h3 className="text-lg font-bold text-center uppercase">
