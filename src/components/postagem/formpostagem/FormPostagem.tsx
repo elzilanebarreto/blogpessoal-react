@@ -6,11 +6,11 @@ import {
   type FormEvent,
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Postagem from "../../../models/Postagem";
-import type { Tema } from "../../../models/Tema";
+import type Tema from "../../../models/Tema";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
-import { ClipLoader } from "react-spinners";
 
 function FormPostagem() {
   const navigate = useNavigate();
@@ -145,14 +145,16 @@ function FormPostagem() {
 
   return (
     <div className="container flex flex-col mx-auto items-center">
-      <h1 className="text-4xl text-center my-8">Cadastrar Postagem</h1>
+      <h1 className="text-4xl text-center my-8">
+        {id !== undefined ? "Editar Postagem" : "Cadastrar Postagem"}
+      </h1>
 
       <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovaPostagem}>
         <div className="flex flex-col gap-2">
           <label htmlFor="titulo">Título da Postagem</label>
           <input
             type="text"
-            placeholder="Título"
+            placeholder="Titulo"
             name="titulo"
             required
             className="border-2 border-slate-700 rounded p-2"
@@ -160,7 +162,6 @@ function FormPostagem() {
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
-
         <div className="flex flex-col gap-2">
           <label htmlFor="titulo">Texto da Postagem</label>
           <input
@@ -173,10 +174,8 @@ function FormPostagem() {
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
-
         <div className="flex flex-col gap-2">
           <p>Tema da Postagem</p>
-
           <select
             name="tema"
             id="tema"
@@ -194,10 +193,10 @@ function FormPostagem() {
             ))}
           </select>
         </div>
-
         <button
           type="submit"
-          className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
+          className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800
+                               text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
           disabled={carregandoTema}
         >
           {isLoading ? (
