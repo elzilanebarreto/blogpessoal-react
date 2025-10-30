@@ -5,7 +5,6 @@ interface CardPostagemProps {
   postagem: Postagem;
 }
 function CardPostagem({ postagem }: CardPostagemProps) {
-
   return (
     <div className="border-slate-900 border flex flex-col rounded overflow-hidden justify-between">
       <div>
@@ -27,9 +26,10 @@ function CardPostagem({ postagem }: CardPostagemProps) {
           <p>{postagem.texto}</p>
           <p>Tema: {postagem.tema?.descricao}</p>
           <p>
-            Data:{new Intl.DateTimeFormat("pt-BR", {
-              dateStyle: 'full',
-              timeStyle: 'medium',
+            Data:
+            {new Intl.DateTimeFormat("pt-BR", {
+              dateStyle: "full",
+              timeStyle: "medium",
             }).format(new Date(postagem.data))}
           </p>
         </div>
@@ -37,15 +37,16 @@ function CardPostagem({ postagem }: CardPostagemProps) {
 
       <div className="flex">
         <Link
-          to=""
-          className="w-full text-white bg-indigo-400 hover:bg-indigo-800 flex items-center justify-center py-2"
+          to={`/editarpostagem/${postagem.id}`}
+          className="w-full text-white bg-indigo-400 
+            hover:bg-indigo-800 flex items-center justify-center py-2"
         >
           <button>Editar</button>
         </Link>
-
         <Link
           to=""
-          className="w-full text-white bg-red-400 hover:bg-red-700 flex items-center justify-center"
+          className="text-white bg-red-400 
+            hover:bg-red-700 w-full flex items-center justify-center"
         >
           <button>Deletar</button>
         </Link>
