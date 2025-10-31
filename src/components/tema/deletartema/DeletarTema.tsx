@@ -1,78 +1,76 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
-import type Tema  from "../../../models/Tema";
+import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
+import type Tema from "../../../models/Tema";
 import { buscar, deletar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function DeletarTema() {
-  
   const navigate = useNavigate();
 
-  const [tema, setTema] = useState<Tema>({} as Tema)
-  
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [tema, setTema] = useState<Tema>({} as Tema);
 
-  const { usuario, handleLogout } = useContext(AuthContext)
-  const token = usuario.token
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { id } = useParams<{ id: string }>()
+  const { usuario, handleLogout } = useContext(AuthContext);
+  const token = usuario.token;
+
+  const { id } = useParams<{ id: string }>();
 
   async function buscarPorId(id: string) {
     try {
       await buscar(`/temas/${id}`, setTema, {
         headers: {
-          'Authorization': token
-        }
-      })
-
+          Authorization: token,
+        },
+      });
     } catch (error: any) {
-      if (error.toString().includes('401')){
-        handleLogout()
+      if (error.toString().includes("401")) {
+        handleLogout();
       }
     }
   }
 
   useEffect(() => {
-    if (token === ''){
-      alert('Você precisa estar logado!')
-      navigate('/')
+    if (token === "") {
+      ToastAlerta("Você precisa estar logado!", "info");
+      navigate("/");
     }
-  }, [token])
+  }, [token]);
 
   useEffect(() => {
     if (id !== undefined) {
-      buscarPorId(id)
+      buscarPorId(id);
     }
-  }, [id])
+  }, [id]);
 
   async function deletarTema() {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       await deletar(`/temas/${id}`, {
         headers: {
-          'Authorization': token
-        }
-      })
-      alert('Tema apagado com sucesso!')
-
+          Authorization: token,
+        },
+      });
+      ToastAlerta("Tema apagado com sucesso!", "sucesso");
     } catch (error: any) {
-      if (error.toString().includes('401')) {
-        handleLogout()
+      if (error.toString().includes("401")) {
+        handleLogout();
       } else {
-        alert('Erro ao deletar o tema.')
+        ToastAlerta("Erro ao deletar o tema.", "erro");
       }
     }
 
-    setIsLoading(false)
-    retornar()
+    setIsLoading(false);
+    retornar();
   }
 
   function retornar() {
-    navigate('/temas')
+    navigate("/temas");
   }
-  
+
   return (
     <div className="container w-1/3 mx-auto">
       <h1 className="text-4xl text-center my-4">Deletar Tema</h1>
@@ -89,26 +87,27 @@ function DeletarTema() {
         <p className="p-8 text-3xl bg-slate-200 h-full">{tema.descricao}</p>
 
         <div className="flex">
-          <button className="text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2" onClick={retornar}>
+          <button
+            className="text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2"
+            onClick={retornar}
+          >
             Não
           </button>
-          
-          <button className="w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center" 
-            onClick={deletarTema}>
-            { isLoading ?
-              <ClipLoader 
-                color="#ffffff"
-                size={24}
-              /> :
+
+          <button
+            className="w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center"
+            onClick={deletarTema}
+          >
+            {isLoading ? (
+              <ClipLoader color="#ffffff" size={24} />
+            ) : (
               <span>Sim</span>
-            }
+            )}
           </button>
         </div>
-
       </div>
-
     </div>
-  )
+  );
 }
 
-export default DeletarTema
+export default DeletarTema;
