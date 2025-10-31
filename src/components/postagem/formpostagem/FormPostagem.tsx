@@ -163,7 +163,7 @@ function FormPostagem() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Texto da Postagem</label>
+          <label htmlFor="texto">Texto da Postagem</label>
           <input
             type="text"
             placeholder="Texto"

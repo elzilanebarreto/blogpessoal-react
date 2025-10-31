@@ -10,7 +10,7 @@ function CardPostagem({ postagem }: CardPostagemProps) {
       <div>
         <div className="flex w-full bg-indigo-400 py-2 px-4 items-center gap-4">
           <img
-            src={postagem.usuario?.foto || "https://i.imgur.com/pK6vSCy.png"}
+            src={postagem.usuario?.foto || "https://cdn-icons-png.flaticon.com/128/15678/15678795.png"}
             className="h-12 rounded-full"
             alt={postagem.usuario?.nome}
           />
