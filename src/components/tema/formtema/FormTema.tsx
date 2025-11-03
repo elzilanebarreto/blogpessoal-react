@@ -8,7 +8,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import type { Tema } from "../../../models/Tema";
+import type Tema from "../../../models/Tema";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
@@ -73,7 +73,7 @@ function FormTema() {
             Authorization: token,
           },
         });
-        ToastAlerta("O Tema foi atualizado com sucesso!", "sucesso")
+        ToastAlerta("O Tema foi atualizado com sucesso!", "sucesso");
       } catch (error: any) {
         if (error.toString().includes("401")) {
           handleLogout();
